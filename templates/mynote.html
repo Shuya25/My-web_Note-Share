@@ -1,0 +1,95 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+	.button1{
+		width: 100%;
+		font-size: 1.8rem;
+		position: relative;
+		padding: 1rem 2rem 1rem 2rem;
+		border-radius: 100vh;
+		background: #fff;
+	}
+	.checkstyle{
+		height: auto;
+		width: auto;
+		cursor: pointer;
+	}
+	.list-group1{
+		overflow: auto;
+		height: 450px;
+	}
+
+</style>
+
+<script type="text/javascript">
+	function disp(){
+		// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+		if(window.confirm("このノートを削除します。")){
+			location.href = "/note_delete?q=2";  //ジャンプ
+		}
+	}
+	</script>
+
+<ul class="nav nav-tabs">
+	<li role="presentation"><a href="/home">ホーム</a></li>
+	<li role="presentation"><a href="/note?noteid=0">シェアノート</a></li>
+	<li role="presentation" class="active"><a href="/mynote?noteid=0">マイノート</a></li>
+</ul>
+
+<div class="container-fluid">
+	<div class="row"> <p> </p></div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="list-group">
+			<a href="javascript:window.location.href='/mynote?noteid=new';" class="list-group-item">
+			<h4 class="list-group-item-heading">新規作成</h4>
+			</a>
+			<!--button type="button", class="button1" data-toggle="collapse" data-target="#demo">
+				<span style="color: rgba(218, 139, 75, 0.788);"> + 新規作成</span>
+			</button-->
+			</div>
+			
+			<div class="list-group1" >
+				{% for out in all_out %}
+				{% if output[0] == out[0] %}
+				<a href="javascript:window.location.href='http://localhost:8000/mynote?noteid='+{{out[0]}};" class="list-group-item active">
+				{% else %}
+				<a href="javascript:window.location.href='http://localhost:8000/mynote?noteid='+{{out[0]}};" class="list-group-item">
+				{% endif %}
+				  <h4 class="list-group-item-heading">{{out[1]}}</h4> 
+				  <p class="list-group-item-text">{{out[2][:30]}}</p>
+                  <p class="list-group-item-text">{{out[3]}}　
+                  {% if out[5] == "1" %}
+                    ステータス：公開</p>
+                  {% else %}
+                    ステータス：非公開</p>
+                  {% endif %}
+				</a>
+				{% endfor %}
+			</div>
+			  
+		</div>
+		
+		<div class="col-md-9">
+			<form enctype="multipart/form-data">
+				<p>
+					<input style="width: 89.5%;" atype="text" id="title" name="title" placeholder="新規メモ" value={{output[1]}}>
+
+					<input style="width: 10%;" class="submit-button" type="submit" value="保存" formaction="/note?noteid=new" formmethod="POST">
+				</p>
+				<textarea id="massage" name="massage" cols="150" rows="25" placeholder="入力を開始">{{output[2]}}</textarea>
+				<div>
+					{% if output[5] == "1" %}
+					<p style="text-align: left; float: left;"><label class="checkstyle" for="share_check"><input class="checkstyle" type="checkbox" name="share" id="share_check" value="1" checked="checked"/>公開</label></p>
+					{% else %}
+					<p style="text-align: left; float: left;"><label class="checkstyle" for="share_check"><input class="checkstyle" type="checkbox" name="share" id="share_check" value="1"/>公開</label></p>
+					{% endif %}
+					<p style="text-align: right;"><input class="submit-button" type="button" value="削除" onclick="disp()"></p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

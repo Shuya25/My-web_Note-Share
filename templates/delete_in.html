@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block content %}
+
+<ul class="nav nav-tabs">
+	<li role="presentation"><a href="/home">ホーム</a></li>
+	<li role="presentation"><a href="/note?noteid=0">シェアノート</a></li>
+	<li role="presentation"><a href="/mynote?noteid=0">マイノート</a></li>
+</ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+			{% if check == 1 %}
+			<p> </p>
+			<p style="color:red"> パスワードが違います。</p>
+			{% endif %}
+			<p> </p>
+			<p> 使用中のアカウントを削除します。このアカウントが作成したノートも同時に削除されます。</p>
+			<p>パスワードを入力してください。</p>
+			<form action="/delete" method="POST" enctype="multipart/form-data">
+				<p>
+					<input style="width: 50%;" type="password" id="pass" name="pass" placeholder="パスワード">
+					<input class="submit-button" value="削除する" type="submit">
+				</p>
+			</form>
+
+			<!--p>
+			<a href="http://localhost:8000/delete_all" onclick="clickDisplayAlert();return false">＜全て削除＞</a>
+			</p-->
+			
+			<a href="http://localhost:8000/home" onclick="clickDisplayAlert();return false">＜戻る＞</a>
+			</p>
+
+		</div>
+	</div>
+</div>
+{% endblock %}

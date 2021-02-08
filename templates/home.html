@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block content %}
+
+<ul class="nav nav-tabs">
+	<li role="presentation" class="active"><a href="/home">ホーム</a></li>
+	<li role="presentation"><a href="/note?noteid=0">シェアノート</a></li>
+	<li role="presentation"><a href="/mynote?noteid=0">マイノート</a></li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <p></p>
+            <h2> アカウント情報</h2>
+            <table style="width: 100%;">
+                <tr>
+                    <th> メールアドレス </th>
+                    <td>{{ id }}</td>
+                    <th>
+                        <a href="http://localhost:8000/delete" onclick="clickDisplayAlert();return false">(アカウント削除)</a>
+                    </th>
+                </tr>
+                <tr>
+                    <th>名前</th>
+                    <td>{{ name }}</td>
+                </tr>
+                <tr>
+                    <th>ノート数</th>
+                    <td>{{mynote_num}} 　(公開：{{sharenote_num}} ， 非公開：{{mynote_num - sharenote_num}})</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row"><p> </p> </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2> グループリスト </h2>
+            <table border="1" style="width: 100%;">
+            <tr>
+                <th> 名前 </th>
+                <th> 公開ノート数 </th>
+            </tr>
+            {% set ns = namespace(cnt = 0) %}
+            {% for out in output %}
+            <tr>
+                <td> {{ out[1] }} </td>
+                <td align="center"> {{ note_num[ns.cnt] }} </td>
+            </tr>
+            {% set ns.cnt = ns.cnt + 1 %}
+            {% endfor %}
+            </table>
+
+            <a href="http://localhost:8000/" onclick="clickDisplayAlert();return false">＜戻る＞</a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

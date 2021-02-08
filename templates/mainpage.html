@@ -1,0 +1,20 @@
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> {{ title }} </title>
+    <!-- OK -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- NG -->
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    </head>
+    <body>
+    <h1> {{ title }} </h1>
+    
+    {% block content %}
+    <!-- ここに個別部分が挿入される -->
+    {% endblock %}
+
+    </body>
+</html>
+

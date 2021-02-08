@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container">
+<p><font size="5" ユーザの登録</font></p>
+<p style="color:red">このIDは既に使用されています。</p>
+<form action="/" method="POST" enctype="multipart/form-data">
+	<p><input type="text" id="id" name="id" placeholder="ID"></p>
+	<p><input type="text" id="name" name="name" placeholder="名前"></p>
+	<p><input class="submit-button" value="登録する" type="submit"></p>
+</form>
+<a href="http://localhost:8000/login" onclick="clickDisplayAlert();return false" style="color:blue">＜ログインはこちら＞</a>
+</div>
+{% endblock %}
